@@ -2,23 +2,19 @@
 # Base Python image
 FROM python:3.11-slim
 
-# Environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Set workdir
 WORKDIR /app
 
-# Install dependencies
-COPY ./app/requirements.txt /app/
+# Update these COPY lines:
+COPY backend/app/requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install uvicorn[standard]
 
-# Copy application code
-COPY ./app /app/app
-COPY .env /app/.env
-COPY ./app/scripts /app/scripts
+COPY backend/app /app/app
+COPY backend/app/scripts /app/scripts
+COPY backend/.env /app/.env
 
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
-# Run with uvicorn
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
