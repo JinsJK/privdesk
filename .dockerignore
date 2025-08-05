@@ -1,57 +1,22 @@
-# Node & Python dependencies
-**/node_modules
-**/__pycache__
+# General ignores
+**/__pycache__/
 **/*.py[cod]
-
-# Compiled output
 **/*.log
 **/*.sqlite3
-
-# System/IDE
 **/.DS_Store
+
+# Env and secrets
 **/.env
+**/.env.*
+
+# IDE settings
 **/.vscode
 **/.idea
 
-# Docker volume
-**/pgdata
+# Node dependencies and builds
+frontend/node_modules
+frontend/dist
+frontend/dist-ssr
 
-# Explicit env ignores
-frontend/.env
-backend/.env
-
-# Backend ignore
-backend/**/__pycache__
-backend/**/*.py[cod]
-backend/**/*.pyo
-backend/**/*.pyd
-backend/**/*.env
-backend/**/.vscode
-backend/**/.idea
-backend/**/.DS_Store
-backend/**/*.swp
-backend/**/*.log
-backend/**/*.sqlite3
-
-# Frontend ignore
-frontend/**/*.log
-frontend/**/npm-debug.log*
-frontend/**/yarn-debug.log*
-frontend/**/pnpm-debug.log*
-frontend/**/node_modules
-frontend/**/dist
-frontend/**/dist-ssr
-frontend/**/.env
-frontend/**/.env.local
-frontend/**/.env.*.local
-frontend/**/.DS_Store
-frontend/**/.idea
-frontend/**/.vscode
-frontend/**/*.suo
-frontend/**/*.ntvs*
-frontend/**/*.njsproj
-frontend/**/*.sln
-frontend/**/*.sw?
-
-# Fly config (optional, if you don’t want to copy it inside image)
+# Optional: Fly config
 fly.toml

@@ -25,22 +25,11 @@ jobs:
         working-directory: ./frontend
         run: npm run build
 
-      - name: Set up Docker Compose
-        run: docker compose --version
-
-      - name: Build and start all services
-        run: docker compose up -d --build
-
-      - name: Wait for backend to start
-        run: |
-          echo "Waiting for backend..."
-          sleep 10
-
       - name: Check frontend build exists
         run: test -f frontend/dist/index.html
 
-      - name: Stop containers
-        run: docker compose down
+      - name: Install Fly CLI
+        uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy to Fly.io
         uses: superfly/flyctl-actions@1.5
