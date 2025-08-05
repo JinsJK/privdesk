@@ -7,15 +7,16 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# ✅ Copy from project root
-COPY backend/app/requirements.txt /app/
+# ✅ Change this
+COPY app/requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install uvicorn[standard]
 
-COPY backend/app /app/app
-COPY backend/app/scripts /app/scripts
+# ✅ Change these too
+COPY app /app/app
+COPY app/scripts /app/scripts
 
-# ❌ Remove this — .env should be injected from GitHub Actions
-# COPY backend/.env /app/.env
+# ❌ Remove hardcoded .env COPY
+# .env should be set via environment variable in docker-compose or GitHub Actions
 
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
