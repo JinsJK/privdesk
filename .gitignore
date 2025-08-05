@@ -1,0 +1,21 @@
+# Node & Python dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+
+# Compiled output
+*.log
+*.sqlite3
+
+# System/IDE
+.DS_Store
+.env
+.vscode/
+.idea/
+
+# Docker volume
+pgdata/
+
+# Explicit env ignores (redundant if subproject has its own .gitignore)
+frontend/.env
+backend/.env
