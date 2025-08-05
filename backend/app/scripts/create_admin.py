@@ -1,4 +1,5 @@
 # backend/app/scripts/create_admin.py
+import os
 from app.db.session import SessionLocal
 from app.models.user import User
 from passlib.hash import bcrypt
@@ -6,8 +7,8 @@ from passlib.hash import bcrypt
 def create_admin():
     db = SessionLocal()
 
-    admin_email = "jinsisnear@gmail.com"
-    admin_password = "admin1234"
+    admin_email = os.getenv("ADMIN_EMAIL", "adminuser@gmail.com")
+    admin_password = os.getenv("ADMIN_PASSWORD", "admin1234")
 
     existing_user = db.query(User).filter(User.email == admin_email).first()
     if existing_user:
@@ -22,7 +23,7 @@ def create_admin():
     )
     db.add(admin)
     db.commit()
-    print("Admin user created.")
+    print(f"Admin user '{admin_email}' created.")
 
 if __name__ == "__main__":
     create_admin()

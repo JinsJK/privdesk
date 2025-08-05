@@ -10,6 +10,11 @@ from app.api.routes import messages
 # Create tables
 Base.metadata.create_all(bind=engine)
 
+# Auto-create admin
+from scripts.create_admin import create_admin
+create_admin()
+
+
 # Initialize app
 app = FastAPI(title="PrivDesk - Support API", version="0.1.0")
 
