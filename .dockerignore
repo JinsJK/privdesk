@@ -1,75 +1,57 @@
-# flyctl launch added from .gitignore
 # Node & Python dependencies
-**\node_modules
-**\__pycache__
-**\*.py[cod]
+**/node_modules
+**/__pycache__
+**/*.py[cod]
 
 # Compiled output
-**\*.log
-**\*.sqlite3
+**/*.log
+**/*.sqlite3
 
 # System/IDE
-**\.DS_Store
-**\.env
-**\.vscode
-**\.idea
+**/.DS_Store
+**/.env
+**/.vscode
+**/.idea
 
 # Docker volume
-**\pgdata
+**/pgdata
 
-# Explicit env ignores (redundant if subproject has its own .gitignore)
-**\frontend\.env
-**\backend\.env
+# Explicit env ignores
+frontend/.env
+backend/.env
 
-# flyctl launch added from backend\.gitignore
-# Python bytecode
-backend\**\__pycache__
-backend\**\*.py[cod]
-backend\**\*.pyo
-backend\**\*.pyd
+# Backend ignore
+backend/**/__pycache__
+backend/**/*.py[cod]
+backend/**/*.pyo
+backend/**/*.pyd
+backend/**/*.env
+backend/**/.vscode
+backend/**/.idea
+backend/**/.DS_Store
+backend/**/*.swp
+backend/**/*.log
+backend/**/*.sqlite3
 
-# Env files
-backend\**\.env
-backend\**\*.env
+# Frontend ignore
+frontend/**/*.log
+frontend/**/npm-debug.log*
+frontend/**/yarn-debug.log*
+frontend/**/pnpm-debug.log*
+frontend/**/node_modules
+frontend/**/dist
+frontend/**/dist-ssr
+frontend/**/.env
+frontend/**/.env.local
+frontend/**/.env.*.local
+frontend/**/.DS_Store
+frontend/**/.idea
+frontend/**/.vscode
+frontend/**/*.suo
+frontend/**/*.ntvs*
+frontend/**/*.njsproj
+frontend/**/*.sln
+frontend/**/*.sw?
 
-# IDE / Editor files
-backend\**\.vscode
-backend\**\.idea
-backend\**\.DS_Store
-backend\**\*.swp
-
-# Logs
-backend\**\*.log
-
-# Local SQLite or dev DBs (if used)
-backend\**\*.sqlite3
-
-# flyctl launch added from frontend\.gitignore
-# Logs
-frontend\**\*.log
-frontend\**\npm-debug.log*
-frontend\**\yarn-debug.log*
-frontend\**\pnpm-debug.log*
-
-# Dependency folders
-frontend\**\node_modules
-
-# Build output
-frontend\**\dist
-frontend\**\dist-ssr
-
-# Local env
-frontend\**\.env
-frontend\**\.env.local
-frontend\**\.env.*.local
-
-# System/IDE junk
-frontend\**\.DS_Store
-frontend\**\.idea
-frontend\**\.vscode
-frontend\**\*.suo
-frontend\**\*.ntvs*
-frontend\**\*.njsproj
-frontend\**\*.sln
-frontend\**\*.sw?
+# Fly config (optional, if you don’t want to copy it inside image)
 fly.toml
