@@ -1,33 +1,43 @@
-# backend/app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api.routes import auth, users, tickets
-from app.db.session import engine
+from app.api.routes import auth, users, tickets, admin, messages
+
+import os
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 from app.db.base import Base
-from app.api.routes import auth, users, tickets, admin 
-from app.api.routes import messages
 
-# Create tables
-Base.metadata.create_all(bind=engine)
+# Read DB URL from environment variable (works in Fly + local)
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")  # fallback if local
 
-# Auto-create admin
-from scripts.create_admin import create_admin
-create_admin()
+engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {})
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 
 # Initialize app
 app = FastAPI(title="PrivDesk - Support API", version="0.1.0")
 
+# Safe startup logic inside event handler
+@app.on_event("startup")
+def startup():
+    # Create tables (only if no Alembic)
+    Base.metadata.create_all(bind=engine)
+
+    # Create admin user once
+    from app.scripts.create_admin import create_admin
+    create_admin(SessionLocal())  # pass DB session
+
+
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Adjust if frontend origin changes
+    allow_origins=["http://localhost:3000"],  # Replace with frontend URL if needed
     allow_credentials=True,
-    allow_methods=["*"],  # Or: ["GET", "POST", "OPTIONS"]
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include routers
+# Routers
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(users.router, prefix="/users", tags=["users"])
 app.include_router(tickets.router, prefix="/tickets", tags=["tickets"])
