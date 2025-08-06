@@ -31,7 +31,10 @@ def startup():
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Replace with frontend URL if needed
+    allow_origins=[
+        "http://localhost:3000",              # local dev
+        "https://privdesk.vercel.app",        # your Vercel frontend domain
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
