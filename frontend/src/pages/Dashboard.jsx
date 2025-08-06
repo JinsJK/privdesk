@@ -46,7 +46,7 @@ const Dashboard = () => {
 
     setLoading(true)
     try {
-      await api.post('/tickets', { title, description })
+      await api.post('/tickets/', { title, description })
       setTitle('')
       setDescription('')
       fetchTickets()
