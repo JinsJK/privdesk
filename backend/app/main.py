@@ -19,7 +19,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 app = FastAPI(title="PrivDesk - Support API", version="0.1.0")
 
 # 🔒 Enforce HTTPS redirect to avoid mixed content
-app.add_middleware(HTTPSRedirectMiddleware)
+# app.add_middleware(HTTPSRedirectMiddleware)
 
 # Safe startup logic inside event handler
 @app.on_event("startup")
