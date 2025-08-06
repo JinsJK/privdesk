@@ -16,6 +16,9 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const { isAuthenticated, isAdmin, token } = useAuth()
 
+  console.log("🧪 VITE_API_URL =", import.meta.env.VITE_API_URL)
+
+
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login', { state: { requireLogin: true } })
