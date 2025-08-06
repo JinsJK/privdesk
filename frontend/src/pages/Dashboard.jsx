@@ -30,6 +30,7 @@ const Dashboard = () => {
       const res = await api.get('/tickets')
       setTickets(res.data)
     } catch (err) {
+     console.error('Fetch tickets error:', err) // 🔍 log the actual error
       toast.error('Failed to fetch tickets: ' + (err.response?.data?.detail || err.message))
     }
   }
