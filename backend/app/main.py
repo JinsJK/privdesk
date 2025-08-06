@@ -6,7 +6,6 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.db.base import Base
-from fastapi.middleware.httpsredirect import HTTPSRedirectMiddleware
 
 # Read DB URL from environment variable (works in Fly + local)
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")  # fallback if local
@@ -14,12 +13,9 @@ DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./test.db")  # fallback if l
 engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False} if "sqlite" in DATABASE_URL else {})
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
 # Initialize app
 app = FastAPI(title="PrivDesk - Support API", version="0.1.0")
 
-# 🔒 Enforce HTTPS redirect to avoid mixed content
-# app.add_middleware(HTTPSRedirectMiddleware)
 
 # Safe startup logic inside event handler
 @app.on_event("startup")

@@ -17,4 +17,4 @@ COPY backend/app /app/app
 COPY backend/app/scripts /app/scripts
 
 # Do not copy .env — handled by docker-compose or CI
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers"]
