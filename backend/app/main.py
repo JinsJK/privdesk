@@ -38,8 +38,8 @@ def startup():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",              # local dev
-        "https://privdesk.vercel.app",        # your Vercel frontend domain
+        "http://localhost:3000",                    # for local dev
+        "https://privdesk-frontend.fly.dev",        # ✅ Fly frontend
     ],
     allow_credentials=True,
     allow_methods=["*"],
