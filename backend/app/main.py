@@ -17,8 +17,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 app = FastAPI(
     title="PrivDesk - Support API",
     version="0.1.0",
-    root_path="/",
-    servers=[
+    servers=[  # you can keep this
         {"url": "https://privdesk-app.fly.dev", "description": "Fly Production"},
     ]
 )
