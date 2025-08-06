@@ -14,7 +14,14 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False} i
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Initialize app
-app = FastAPI(title="PrivDesk - Support API", version="0.1.0")
+app = FastAPI(
+    title="PrivDesk - Support API",
+    version="0.1.0",
+    root_path="/",
+    servers=[
+        {"url": "https://privdesk-app.fly.dev", "description": "Fly Production"},
+    ]
+)
 
 
 # Safe startup logic inside event handler

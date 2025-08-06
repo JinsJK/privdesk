@@ -30,7 +30,7 @@ const Dashboard = () => {
 
   const fetchTickets = async () => {
     try {
-      const res = await api.get('/tickets')
+      const res = await api.get('/tickets/')
       setTickets(res.data)
     } catch (err) {
      console.error('Fetch tickets error:', err) // 🔍 log the actual error
