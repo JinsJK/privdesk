@@ -4,6 +4,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from app.db.base import Base
 from app.models.user import User
+from app.models.message import Message
 
 class Ticket(Base):
     __tablename__ = "tickets"
