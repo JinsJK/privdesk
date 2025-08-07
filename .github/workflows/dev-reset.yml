@@ -11,11 +11,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Fly CLI
+      - name: Setup Fly CLI
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Run reset script on Fly.io
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
-          flyctl ssh console -a privdesk-app -C "python3 app/scripts/dev_reset.py"
+          flyctl ssh console -a privdesk-app -C "python3 /app/app/scripts/dev_reset.py"
