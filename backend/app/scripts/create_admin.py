@@ -1,5 +1,4 @@
 # backend/app/scripts/create_admin.py
-
 import os
 from app.models.user import User
 from passlib.hash import bcrypt

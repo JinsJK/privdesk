@@ -3,7 +3,7 @@ version: "3.9"
 services:
   backend:
     build:
-      context: .                # Use project root
+      context: .
       dockerfile: backend/Dockerfile
     container_name: privdesk-backend
     ports:

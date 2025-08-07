@@ -16,10 +16,3 @@ def delete_account(db: Session = Depends(get_db), user: User = Depends(get_curre
     db.delete(user)
     db.commit()
     return {"msg": "User deleted"}
-
-from typing import List
-from app.schemas.user import UserOut
-
-@router.get("/all", response_model=List[UserOut])
-def get_all_users(db: Session = Depends(get_db)):
-    return db.query(User).all()

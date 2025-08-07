@@ -16,16 +16,12 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const { isAuthenticated, isAdmin, token } = useAuth()
 
-  console.log("🧪 VITE_API_URL =", import.meta.env.VITE_API_URL)
-
-
   useEffect(() => {
     if (!isAuthenticated) {
       navigate('/login', { state: { requireLogin: true } })
     } else {
       fetchTickets()
     }
-    // eslint-disable-next-line
   }, [isAuthenticated, navigate])
 
   const fetchTickets = async () => {
@@ -33,7 +29,7 @@ const Dashboard = () => {
       const res = await api.get('/tickets/')
       setTickets(res.data)
     } catch (err) {
-     console.error('Fetch tickets error:', err) // 🔍 log the actual error
+     console.error('Fetch tickets error:', err)
       toast.error('Failed to fetch tickets: ' + (err.response?.data?.detail || err.message))
     }
   }
