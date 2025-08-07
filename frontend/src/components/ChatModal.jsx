@@ -1,3 +1,4 @@
+// frontend/src/components/ChatModal.jsx
 import ChatBox from './ChatBox'
 
 const ChatModal = ({ ticketId, onClose }) => {

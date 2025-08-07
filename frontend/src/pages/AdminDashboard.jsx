@@ -1,3 +1,4 @@
+// frontend/src/pages/AdminDashboard.jsx
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'

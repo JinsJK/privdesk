@@ -1,3 +1,4 @@
+// frontend/src/utils/toastUtils.js
 import { toast } from 'react-toastify'
 
 export const showLogoutToast = () => {

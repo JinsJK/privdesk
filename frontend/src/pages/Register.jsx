@@ -1,3 +1,4 @@
+// frontend/src/pages/Register.jsx
 import { useState } from 'react'
 import api from '../api/axios'
 import { useNavigate, Link } from 'react-router-dom'

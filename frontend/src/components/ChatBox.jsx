@@ -1,3 +1,4 @@
+// frontend/src/components/ChatBox.jsx
 import { useEffect, useRef, useState } from 'react'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'

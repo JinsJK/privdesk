@@ -1,3 +1,4 @@
+# backend\app\api\routes\admin.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.api.deps import get_db, get_current_user

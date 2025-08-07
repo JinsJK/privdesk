@@ -1,3 +1,4 @@
+# backend\app\models\message.py
 from sqlalchemy import Column, Integer, ForeignKey, Text, DateTime
 from sqlalchemy.orm import relationship
 from datetime import datetime

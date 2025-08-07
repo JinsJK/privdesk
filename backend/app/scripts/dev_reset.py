@@ -1,18 +1,19 @@
+# backend\app\scripts\dev_reset.py
 from app.db.session import SessionLocal
 from app.models.user import User
 from app.models.ticket import Ticket
-from app.models.message import Message  # ✅ Make sure this import exists
+from app.models.message import Message
 
 def reset_database():
     db = SessionLocal()
     try:
-        # 🔥 First delete messages
+        #  First delete messages
         deleted_messages = db.query(Message).delete()
 
-        # 🔥 Then delete tickets
+        #  Then delete tickets
         deleted_tickets = db.query(Ticket).delete()
 
-        # 🔥 Then delete non-admin users
+        #  Then delete non-admin users
         deleted_users = db.query(User).filter(User.is_admin == False).delete()
 
         db.commit()
