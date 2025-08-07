@@ -1,7 +1,7 @@
 name: Reset Dev DB (Manual)
 
 on:
-  workflow_dispatch:
+  workflow_dispatch:  # Adds a "Run workflow" button in GitHub Actions UI
 
 jobs:
   reset-db:
@@ -18,4 +18,4 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
-          flyctl ssh console -a privdesk-app -C "python3 /app/app/scripts/dev_reset.py"
+          flyctl ssh console -a privdesk-app -C "PYTHONPATH=/app python3 app/scripts/dev_reset.py"
