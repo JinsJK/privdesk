@@ -32,7 +32,7 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy to Fly.io
-        uses: superfly/flyctl-actions@1.5
+        uses: flyctl deploy --remote-only
         with:
           args: "deploy --remote-only"
         env:
