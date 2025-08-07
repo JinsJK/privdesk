@@ -7,7 +7,7 @@ class Message(Base):
     __tablename__ = "messages"
 
     id = Column(Integer, primary_key=True, index=True)
-    ticket_id = Column(Integer, ForeignKey("tickets.id"))
+    ticket_id = Column(Integer, ForeignKey("tickets.id", ondelete="CASCADE"))
     sender_id = Column(Integer, ForeignKey("users.id"))
     content = Column(Text, nullable=False)
     created_at = Column(DateTime, default=datetime.utcnow)

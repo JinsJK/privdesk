@@ -15,7 +15,7 @@ class Ticket(Base):
     status = Column(String, default="open")
     user_id = Column(Integer, ForeignKey("users.id"))
     user = relationship("User", backref="tickets")
-    messages = relationship("Message", back_populates="ticket", order_by="Message.created_at")
+    messages = relationship("Message", back_populates="ticket", order_by="Message.created_at",cascade="all, delete-orphan",passive_deletes=True)
 
 
     created_at = Column(DateTime, default=datetime.utcnow)
