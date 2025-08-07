@@ -1,4 +1,4 @@
-name: Build & Deploy PrivDesk
+name: Build & Deploy PrivDesk Backend
 
 on:
   push:
