@@ -1,4 +1,4 @@
-name: Reset Dev DB on Fly (Manual)
+name: Reset Dev DB (Manual)
 
 on:
   workflow_dispatch:
@@ -8,11 +8,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup Fly CLI
-        uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Fly CLI
+        uses: superfly/flyctl-actions/setup-flyctl@v1.2
 
       - name: Run reset script on Fly.io
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: |
-          fly ssh console -a privdesk-app -C "python3 app/scripts/dev_reset.py"
+          flyctl ssh console -a privdesk-app -C "python3 app/scripts/dev_reset.py"
