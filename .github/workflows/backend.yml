@@ -17,21 +17,10 @@ jobs:
       - name: Create .env file for backend
         run: echo "${{ secrets.BACKEND_ENV }}" > backend/.env
 
-      - name: Install frontend dependencies
-        working-directory: ./frontend
-        run: npm install
-
-      - name: Build frontend
-        working-directory: ./frontend
-        run: npm run build
-
-      - name: Check frontend build exists
-        run: test -f frontend/dist/index.html
-
       - name: Install Fly CLI
         uses: superfly/flyctl-actions/setup-flyctl@master
 
       - name: Deploy to Fly.io
-        run: flyctl deploy --remote-only
+        run: flyctl deploy --remote-only --app ${{ secrets.BACKEND_FLY_APP_NAME }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
