@@ -1,42 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* Add extra spacing between bottom-right toasts */
+
+/* Bottom-right layout + spacing + no horizontal scroll during animation */
 .Toastify__toast-container--bottom-right {
   bottom: 1rem;
   right: 1rem;
-  max-height: 40vh;       /* prevent towering stacks */
-  overflow-y: auto;       /* scroll if needed */
+  max-height: 40vh;   /* prevent towering stacks */
+  overflow-y: auto;   /* scroll if too many toasts */
+  overflow-x: hidden; /* avoid scrollbar flashes */
 }
 
 .Toastify__toast-container--bottom-right .Toastify__toast {
   margin-bottom: 0.75rem; /* gap between stacked toasts */
 }
 
-/* Make the entrance/exit a bit smoother */
-.Toastify__toast--enter {
-  animation: slideIn 0.3s ease forwards;
-}
-.Toastify__toast--exit {
-  animation: fadeOut 0.2s ease forwards;
-}
+/* Smooth entrance/exit without horizontal overflow */
+.Toastify__toast--enter { animation: slideUp 0.24s ease forwards; }
+.Toastify__toast--exit  { animation: fadeOut 0.20s ease forwards; }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+@keyframes slideUp {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
 }
 
 @keyframes fadeOut {
   from { opacity: 1; }
-  to { opacity: 0; }
+  to   { opacity: 0; }
 }
 
+/* Accessibility: respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .Toastify__toast--enter,
   .Toastify__toast--exit {
