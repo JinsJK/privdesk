@@ -8,8 +8,27 @@ import Navbar from './components/Navbar'
 import PrivateRoute from './components/PrivateRoute'
 import { useAuth } from './context/AuthContext'
 
+// Toastify
+import { useEffect, useState } from 'react'
+import { ToastContainer, Slide } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth < breakpoint : false
+  )
+  useEffect(() => {
+    const mq = window.matchMedia?.(`(max-width: ${breakpoint}px)`)
+    const onChange = e => setIsMobile(e.matches)
+    mq?.addEventListener?.('change', onChange)
+    return () => mq?.removeEventListener?.('change', onChange)
+  }, [breakpoint])
+  return isMobile
+}
+
 function App() {
   const { isAuthenticated } = useAuth()
+  const isMobile = useIsMobile()
 
   return (
     <>
@@ -41,6 +60,31 @@ function App() {
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+
+      {/* Mobile-friendly toasts */}
+      <ToastContainer
+        position={isMobile ? 'bottom-center' : 'top-right'}
+        autoClose={isMobile ? 2200 : 4000}
+        hideProgressBar={isMobile}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss={false}
+        pauseOnHover={!isMobile}
+        draggable={false}
+        limit={isMobile ? 2 : 5}
+        theme="light"
+        transition={Slide}
+        icon={false}
+        style={{
+          padding: isMobile ? '0 8px calc(env(safe-area-inset-bottom, 0) + 8px)' : undefined,
+        }}
+        toastClassName={() =>
+          'rounded-xl shadow-lg border border-gray-200 !bg-white !text-gray-900 !text-sm sm:!text-base px-3 py-2 sm:px-4 sm:py-3'
+        }
+        bodyClassName={() => 'flex items-center gap-2 leading-snug'}
+        progressClassName={() => '!bg-purple-500'}
+        closeButton={isMobile ? false : undefined}
+      />
     </>
   )
 }
