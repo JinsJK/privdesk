@@ -29,7 +29,7 @@ const Dashboard = () => {
       const res = await api.get('/tickets/')
       setTickets(res.data)
     } catch (err) {
-     console.error('Fetch tickets error:', err)
+      console.error('Fetch tickets error:', err)
       toast.error('Failed to fetch tickets: ' + (err.response?.data?.detail || err.message))
     }
   }
@@ -74,7 +74,6 @@ const Dashboard = () => {
     }
   }
 
-  // Close modal on ESC key
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Escape') {
       setActiveTicketId(null)
@@ -87,63 +86,69 @@ const Dashboard = () => {
   }, [handleKeyDown])
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-4">My Tickets</h1>
+    <div className="mx-auto max-w-3xl px-4 sm:px-6 mt-6 sm:mt-10">
+      <h1 className="text-xl sm:text-2xl font-bold mb-4">My Tickets</h1>
 
       <input
         value={title}
         onChange={e => setTitle(e.target.value)}
         placeholder="Title"
-        className="w-full p-2 border mb-2"
+        className="w-full p-3 rounded-lg border border-gray-300 mb-3 focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <textarea
         value={description}
         onChange={e => setDescription(e.target.value)}
         placeholder="Description"
-        className="w-full p-2 border mb-2"
+        className="w-full p-3 rounded-lg border border-gray-300 mb-3 min-h-[110px] resize-y focus:outline-none focus:ring-2 focus:ring-purple-500"
       />
       <button
         onClick={createTicket}
         disabled={loading}
-        className={`bg-purple-600 text-white px-4 py-2 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`w-full sm:w-auto rounded-full bg-purple-600 text-white px-5 py-2.5 font-medium shadow-sm hover:bg-purple-700 transition ${
+          loading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
       >
         {loading ? 'Creating...' : 'Create Ticket'}
       </button>
 
       <div className="mt-8">
         {tickets.length > 0 ? (
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {tickets.map(ticket => (
               <li
                 key={ticket.id}
-                className="bg-white rounded-xl shadow p-4 hover:shadow-md transition-all duration-300"
+                className="bg-white rounded-xl shadow p-3 sm:p-4 hover:shadow-md transition"
               >
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-3">
                   <div className="flex-1">
-                    <h2 className="text-lg font-semibold text-gray-800">{ticket.title}</h2>
-                    <p className="text-gray-700 mt-1">{ticket.description}</p>
+                    <h2 className="text-base sm:text-lg font-semibold text-gray-800 break-words">
+                      {ticket.title}
+                    </h2>
+                    <p className="text-gray-700 mt-1 break-words">
+                      {ticket.description}
+                    </p>
 
                     <span
-                      className={`inline-block mt-2 px-2 py-0.5 text-xs font-semibold rounded uppercase tracking-wide 
+                      className={`inline-block mt-2 px-2 py-0.5 text-xs font-semibold rounded uppercase tracking-wide
                         ${ticket.status === 'open' ? 'bg-green-100 text-green-700' : 'bg-gray-200 text-gray-800'}`}
                     >
                       {ticket.status}
                     </span>
 
                     {isAdmin && ticket.user?.email && (
-                      <p className="text-sm text-blue-600 mt-2">
+                      <p className="text-sm text-blue-600 mt-2 break-all">
                         Created by: {ticket.user.email}
                       </p>
                     )}
                   </div>
 
-                  <div className="flex flex-col md:items-end gap-2">
+                  <div className="flex flex-col md:items-end gap-2 w-full md:w-auto">
                     {isAdmin && (
-                      <div className="flex gap-2 items-center mt-2 md:mt-0">
+                      <div className="flex flex-col sm:flex-row gap-2 items-stretch sm:items-center mt-2 md:mt-0">
                         <select
                           value={ticket.status}
                           onChange={e => updateStatus(ticket.id, e.target.value)}
-                          className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                          className="w-full sm:w-auto border border-gray-300 rounded px-2 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
                         >
                           <option value="open">Open</option>
                           <option value="closed">Closed</option>
@@ -151,7 +156,7 @@ const Dashboard = () => {
 
                         <button
                           onClick={() => deleteTicket(ticket.id)}
-                          className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 text-sm rounded shadow-sm"
+                          className="w-full sm:w-auto bg-red-500 hover:bg-red-600 text-white px-3 py-2 text-sm rounded shadow-sm transition"
                         >
                           Delete
                         </button>
@@ -161,7 +166,7 @@ const Dashboard = () => {
                     {ticket.status === 'open' && (
                       <button
                         onClick={() => setActiveTicketId(ticket.id)}
-                        className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1 rounded text-sm shadow transition duration-200"
+                        className="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded text-sm shadow transition"
                       >
                         💬 Chat
                       </button>
