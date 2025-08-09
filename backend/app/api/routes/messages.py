@@ -20,7 +20,7 @@ def get_messages(ticket_id: int, db: Session = Depends(get_db), user: User = Dep
 
     messages = (
         db.query(Message)
-        .options(joinedload(Message.sender))  # we need sender.email
+        .options(joinedload(Message.sender))  # sender.email
         .filter(Message.ticket_id == ticket_id)
         .order_by(Message.created_at)
         .all()

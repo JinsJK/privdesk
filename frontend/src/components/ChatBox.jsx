@@ -27,7 +27,6 @@ const ChatBox = ({ ticketId }) => {
     fetchMessages()
     const interval = setInterval(fetchMessages, 5000)
     return () => clearInterval(interval)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, ticketId])
 
   useEffect(() => {
@@ -76,13 +75,12 @@ const ChatBox = ({ ticketId }) => {
     })
   }, [messages])
 
-  // which side does THIS message go?
   // admin viewing => admin on right; user viewing => user on right
   const alignRightFor = (msg) => (viewerIsAdmin ? msg.is_admin : !msg.is_admin)
 
   const roleLabel = (msg) => {
     if (msg.is_admin) return 'Admin'
-    // backend may provide one of these; fallback to "User"
+    // fallback to "User"
     return msg.user_email || msg.sender_email || msg.email || 'User'
   }
 
