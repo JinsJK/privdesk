@@ -36,3 +36,14 @@
     animation: none;
   }
 }
+
+/* Smaller toast box on mobile screens */
+@media (max-width: 640px) {
+  .Toastify__toast-container--bottom-center .Toastify__toast {
+    max-width: 85%;       /* shrink width */
+    margin: 0 auto;       /* center horizontally */
+    padding: 0.5rem 0.75rem; /* less padding inside */
+    font-size: 0.85rem;   /* slightly smaller text */
+    border-radius: 0.5rem; /* a bit less round */
+  }
+}
