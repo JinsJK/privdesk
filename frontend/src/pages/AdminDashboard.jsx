@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'
-import { toast } from 'react-toastify'
+import { showErrorToast } from '../utils/toastUtils'
 
 const AdminDashboard = () => {
   const { isAdmin } = useAuth()
@@ -14,7 +14,7 @@ const AdminDashboard = () => {
         const res = await api.get('/admin/stats')
         setStats(res.data)
       } catch (err) {
-        toast.error('Failed to fetch stats: ' + (err.response?.data?.detail || err.message))
+        showErrorToast('Failed to fetch stats: ' + (err.response?.data?.detail || err.message))
       }
     }
 

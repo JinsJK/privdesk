@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../api/axios'
 import { useAuth } from '../context/AuthContext'
-import { toast } from 'react-toastify'
+import { showSuccessToast, showErrorToast } from '../utils/toastUtils'
 import ChatModal from '../components/ChatModal'
 
 const Dashboard = () => {
@@ -30,13 +30,13 @@ const Dashboard = () => {
       setTickets(res.data)
     } catch (err) {
       console.error('Fetch tickets error:', err)
-      toast.error('Failed to fetch tickets: ' + (err.response?.data?.detail || err.message))
+      showErrorToast('Failed to fetch tickets: ' + (err.response?.data?.detail || err.message))
     }
   }
 
   const createTicket = async () => {
     if (!title.trim() || !description.trim()) {
-      toast.error('Title and description are required.')
+      showErrorToast('Title and description are required.')
       return
     }
 
@@ -46,9 +46,9 @@ const Dashboard = () => {
       setTitle('')
       setDescription('')
       fetchTickets()
-      toast.success('Ticket created successfully!')
+      showSuccessToast('Ticket created successfully!')
     } catch (err) {
-      toast.error('Ticket creation failed: ' + (err.response?.data?.detail || err.message))
+      showErrorToast('Ticket creation failed: ' + (err.response?.data?.detail || err.message))
     } finally {
       setLoading(false)
     }
@@ -57,20 +57,20 @@ const Dashboard = () => {
   const deleteTicket = async (id) => {
     try {
       await api.delete(`/tickets/${id}`)
-      toast.success('Ticket deleted')
+      showSuccessToast('Ticket deleted')
       fetchTickets()
     } catch (err) {
-      toast.error('Delete failed: ' + (err.response?.data?.detail || err.message))
+      showErrorToast('Delete failed: ' + (err.response?.data?.detail || err.message))
     }
   }
 
   const updateStatus = async (id, newStatus) => {
     try {
       await api.patch(`/tickets/${id}?status=${newStatus}`)
-      toast.success('Status updated')
+      showSuccessToast('Status updated')
       fetchTickets()
     } catch (err) {
-      toast.error('Update failed: ' + (err.response?.data?.detail || err.message))
+      showErrorToast('Update failed: ' + (err.response?.data?.detail || err.message))
     }
   }
 

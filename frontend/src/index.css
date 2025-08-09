@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.Toastify-desktop-offset.Toastify__toast-container--top-right {
+  top: 72px;   /* adjust to your navbar height if needed */
+  right: 14px;
+}

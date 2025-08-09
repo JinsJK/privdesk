@@ -3,7 +3,7 @@ import { useState } from 'react'
 import api from '../api/axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
-import { toast } from 'react-toastify'
+import { showSuccessToast, showErrorToast, showInfoToast } from '@/utils/toastUtils'
 
 const Register = () => {
   const [email, setEmail] = useState('')
@@ -18,10 +18,10 @@ const Register = () => {
     setLoading(true)
     try {
       await api.post('/auth/register', { email, password, consent })
-      toast.success('Registration successful!')
+      showSuccessToast('Registration successful!')
       navigate('/login')
     } catch (err) {
-      toast.error(err.response?.data?.detail || 'Registration failed')
+      showErrorToast(err.response?.data?.detail || 'Registration failed')
     } finally {
       setLoading(false)
     }

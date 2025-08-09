@@ -3,7 +3,7 @@ import { useState } from 'react'
 import api from '../api/axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { toast } from 'react-toastify'
+import { showSuccessToast, showErrorToast, showInfoToast } from '@/utils/toastUtils'
 import { Eye, EyeOff } from 'lucide-react'
 
 const Login = () => {
@@ -18,10 +18,10 @@ const Login = () => {
     try {
       const res = await api.post('/auth/login', { email, password })
       login(res.data.access_token)
-      toast.success('Login successful!')
+      showSuccessToast('Login successful!')
       navigate('/dashboard')
     } catch (err) {
-      toast.error('Login failed')
+      showErrorToast('Login failed')
     }
   }
 
