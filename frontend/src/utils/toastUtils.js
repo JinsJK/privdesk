@@ -13,7 +13,7 @@ const tint = {
   warning: '!bg-amber-50 !text-amber-900 !border-amber-200',
 }
 
-const defaults = { icon: false, closeOnClick: true }
+const defaults = { icon: false, closeOnClick: true, autoClose: 3000 }
 const opts = (extra) => ({ ...defaults, ...(extra || {}) })
 
 export const showSuccessToast = (msg, options) =>

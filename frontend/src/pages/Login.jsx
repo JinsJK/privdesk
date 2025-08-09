@@ -20,6 +20,7 @@ const Login = () => {
       login(res.data.access_token)
       showSuccessToast('Login successful!')
       navigate('/dashboard')
+      setTimeout(() => toast.dismiss(), 1500)
     } catch (err) {
       showErrorToast('Login failed')
     }

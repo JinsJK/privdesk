@@ -70,7 +70,7 @@ function App() {
         newestOnTop
         closeOnClick
         pauseOnFocusLoss={false}
-        pauseOnHover={!isMobile}
+        pauseOnHover={false}
         draggable={false}
         limit={isMobile ? 2 : 5}
         theme="light"
