@@ -76,7 +76,7 @@ function App() {
         theme="light"
         transition={Slide}
         icon={false}
-        toastContainerClassName={isMobile ? '!p-2' : 'Toastify-desktop-offset'}
+        toastContainerClassName={isMobile ? '!p-2' : undefined}
         style={isMobile ? { paddingBottom: 'calc(env(safe-area-inset-bottom, 0) + 8px)' } : undefined}
         toastClassName={() =>
           'rounded-xl shadow-lg border !border-gray-200 !bg-white !text-gray-900 !text-sm sm:!text-base px-3 py-2 sm:px-4 sm:py-3'
