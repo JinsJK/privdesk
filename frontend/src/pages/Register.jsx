@@ -3,7 +3,7 @@ import { useState } from 'react'
 import api from '../api/axios'
 import { useNavigate, Link } from 'react-router-dom'
 import { Eye, EyeOff } from 'lucide-react'
-import { showSuccessToast, showErrorToast, showInfoToast } from '@/utils/toastUtils'
+import { showSuccessToast, showErrorToast, showInfoToast } from '../utils/toastUtils'
 
 const Register = () => {
   const [email, setEmail] = useState('')
