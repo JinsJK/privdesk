@@ -1,7 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.Toastify-desktop-offset.Toastify__toast-container--top-right {
-  top: 72px;   /* adjust to your navbar height if needed */
-  right: 14px;
+/* Add extra spacing between bottom-right toasts */
+.Toastify__toast-container--bottom-right {
+  bottom: 1rem;
+  right: 1rem;
+  max-height: 40vh;       /* prevent towering stacks */
+  overflow-y: auto;       /* scroll if needed */
+}
+
+.Toastify__toast-container--bottom-right .Toastify__toast {
+  margin-bottom: 0.75rem; /* gap between stacked toasts */
+}
+
+/* Make the entrance/exit a bit smoother */
+.Toastify__toast--enter {
+  animation: slideIn 0.3s ease forwards;
+}
+.Toastify__toast--exit {
+  animation: fadeOut 0.2s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .Toastify__toast--enter,
+  .Toastify__toast--exit {
+    animation: none;
+  }
 }

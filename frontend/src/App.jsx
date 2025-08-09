@@ -64,8 +64,8 @@ function App() {
 
       {/* Mobile-friendly toasts */}
       <ToastContainer
-        position={isMobile ? 'bottom-center' : 'top-right'}
-        autoClose={isMobile ? 2200 : 4000}
+        position={isMobile ? 'bottom-center' : 'bottom-right'}
+        autoClose={isMobile ? 2200 : 5000}
         hideProgressBar={isMobile}
         newestOnTop
         closeOnClick
